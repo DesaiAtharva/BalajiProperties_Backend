@@ -116,6 +116,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://balaji-properties-o874-git-main-atharvas-projects-4caa8f71.vercel.app",
 ]
 
 # REST Framework Settings

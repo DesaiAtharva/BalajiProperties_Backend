@@ -130,14 +130,10 @@ REST_FRAMEWORK = {
 
 # Cloudinary Configuration
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME', 'dkgdxgipe'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY', '974774229398468'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET', 'bY8vlCiakgJCCiDuJj3Z98CzZew'),
 }
 
-# Use Cloudinary for Media if keys are present
-if CLOUDINARY_STORAGE['CLOUD_NAME'] and CLOUDINARY_STORAGE['API_KEY']:
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    print("Using Cloudinary for Media Storage")
-else:
-    print("WARNING: Using local storage for Media (Not persistent!)")
+# Force Cloudinary for Media Storage
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

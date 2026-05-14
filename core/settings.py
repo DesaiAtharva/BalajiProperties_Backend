@@ -135,5 +135,9 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
 }
 
-if CLOUDINARY_STORAGE['CLOUD_NAME']:
+# Use Cloudinary for Media if keys are present
+if CLOUDINARY_STORAGE['CLOUD_NAME'] and CLOUDINARY_STORAGE['API_KEY']:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    print("Using Cloudinary for Media Storage")
+else:
+    print("WARNING: Using local storage for Media (Not persistent!)")

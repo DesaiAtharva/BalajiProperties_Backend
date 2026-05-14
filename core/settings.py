@@ -130,9 +130,9 @@ REST_FRAMEWORK = {
 
 # Cloudinary Configuration
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME', 'dkgdxgipe'),
-    'API_KEY': os.getenv('CLOUDINARY_API_KEY', '974774229398468'),
-    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET', 'bY8vlCiakgJCCiDuJj3Z98CzZew'),
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME') or 'dkgdxgipe',
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY') or '974774229398468',
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET') or 'bY8vlCiakgJCCiDuJj3Z98CzZew',
 }
 
 # Force Cloudinary for Media Storage

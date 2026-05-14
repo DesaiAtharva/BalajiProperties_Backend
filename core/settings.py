@@ -117,6 +117,10 @@ STORAGES = {
     },
 }
 
+# Legacy Storage Settings (Required by some libraries like Cloudinary Storage)
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

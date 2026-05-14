@@ -86,7 +86,7 @@ def seed():
             'bhk': 0,
             'bathrooms': 0,
             'sqft': 2200,
-            'main_image': 'https://images.unsplash.com/photo-1524230659092-dc20b01227a1?auto=format&fit=crop&q=80&w=800',
+            'main_image': 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=800',
             'status': 'For Sale',
             'is_approved': True,
             'is_featured': True,
@@ -103,7 +103,7 @@ def seed():
             'bhk': 0,
             'bathrooms': 2,
             'sqft': 1400,
-            'main_image': 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800',
+            'main_image': 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=800',
             'status': 'For Sale',
             'is_approved': True,
             'is_featured': True,
@@ -120,7 +120,7 @@ def seed():
             'bhk': 3,
             'bathrooms': 3,
             'sqft': 1800,
-            'main_image': 'https://images.unsplash.com/photo-1512918766673-cd8085d34191?auto=format&fit=crop&q=80&w=800',
+            'main_image': 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800',
             'status': 'For Sale',
             'is_approved': True,
             'is_featured': False,
@@ -147,11 +147,11 @@ def seed():
     ]
 
     for data in properties_data:
-        Property.objects.get_or_create(
+        Property.objects.update_or_create(
             title=data['title'],
             defaults=data
         )
-    print("Successfully seeded property data!")
+    print("Successfully seeded and updated property data!")
 
 if __name__ == '__main__':
     seed()

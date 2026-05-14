@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+from cloudinary.models import CloudinaryField
 
 class Property(models.Model):
     # Status choices
@@ -80,7 +81,7 @@ class Property(models.Model):
     lister_role = models.CharField(max_length=50, default='Owner', help_text="Owner, Agent, etc.")
     
     # 6. SYSTEM FIELDS
-    main_image = models.ImageField(upload_to='property_images/', blank=True, null=True)
+    main_image = CloudinaryField('image', blank=True, null=True)
     is_approved = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -49,12 +49,34 @@ class PropertyDetailAPIView(generics.RetrieveAPIView):
 
 class PropertyCreateAPIView(generics.CreateAPIView):
     """
-    Public API for users to submit a property listing.
-    Stored with is_approved=False by default.
+    Public API for users to submit a property listing with multiple images.
     """
     queryset = Property.objects.all()
     serializer_class = PropertyCreateSerializer
     permission_classes = [permissions.AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        property_obj = serializer.save()
+
+        # Handle multiple images from categories
+        from .models import PropertyImage
+        
+        # We look for files with category prefixes like 'img_interior_1', 'img_exterior_1', etc.
+        for file_key in request.FILES:
+            if file_key.startswith('img_'):
+                # Extract category from key (e.g., 'img_interior_0' -> 'Interior')
+                parts = file_key.split('_')
+                if len(parts) >= 2:
+                    category = parts[1].capitalize()
+                    PropertyImage.objects.create(
+                        property=property_obj,
+                        image=request.FILES[file_key],
+                        category=category
+                    )
+        
+        return Response(PropertySerializer(property_obj).data, status=status.HTTP_201_CREATED)
 
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token

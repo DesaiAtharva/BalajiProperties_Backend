@@ -1,8 +1,21 @@
 from rest_framework import serializers
 from .models import Property, Inquiry
 
+class PropertyImageSerializer(serializers.ModelSerializer):
+    url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = PropertyImage
+        fields = ['id', 'url', 'category', 'order']
+
+    def get_url(self, obj):
+        if hasattr(obj.image, 'url'):
+            return obj.image.url
+        return str(obj.image)
+
 class PropertySerializer(serializers.ModelSerializer):
     main_image = serializers.SerializerMethodField()
+    images = PropertyImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Property
@@ -11,7 +24,6 @@ class PropertySerializer(serializers.ModelSerializer):
     def get_main_image(self, obj):
         if not obj.main_image:
             return None
-        # Handle both CloudinaryResource objects and simple strings
         if hasattr(obj.main_image, 'url'):
             return obj.main_image.url
         return str(obj.main_image)

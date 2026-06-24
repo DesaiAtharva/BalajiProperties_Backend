@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Property, Inquiry
+from .models import Property, Inquiry, PropertyImage
 
 class PropertyImageSerializer(serializers.ModelSerializer):
     url = serializers.SerializerMethodField()
